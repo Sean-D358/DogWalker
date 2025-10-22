@@ -19,9 +19,18 @@ public class DogWalkCompany {
      * for a walk during the time specified by hour
      * Precondition: 0 <= hour <= 23
      */
-    public int numAvailableDogs (int hour)
-    {
+    public int numAvailableDogs(int hour) {
         return schedule[hour];
+    }
+
+    /**
+     * Decreases, by numberDogsWalked, the number of dogs available for a walk
+     * during the time specified by hour
+     * Preconditions: 0 <= hour <= 23
+     * numberDogsWalked > 0
+     */
+    public void updateDogs(int hour, int numberDogsWalked) {
+        schedule[hour] -= numberDogsWalked;
     }
 
     public int addDogs() {

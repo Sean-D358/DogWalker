@@ -17,21 +17,30 @@ public class DogWalker {
         maxDogs = max;
         company = comp;
     }
+
     public int walkDogs(int hour) {
         int dogs = company.numAvailableDogs(hour);
-        if (dogs < maxDogs)
-        {
-        return dogs;
+        if (dogs < maxDogs) {
+            company.updateDogs(hour, dogs);
+            return dogs;
+        } else {
+            company.updateDogs(hour, maxDogs);
+            return maxDogs;
+        }
     }
-    /**
-    * Decreases, by numberDogsWalked, the number of dogs available for a walk
-    * during the time specified by hour
-    * Preconditions: 0 <= hour <= 23
-    * numberDogsWalked > 0
-    */
-    public void updateDogs(int hour, int numberDogsWalked)
-    {
-        schedule[hour] -= numberDogsWalked;
+    public int dogWalkShift(int startHour, int endHour) {
+        int pay = 0;
+        while(startHour <= endHour)
+        {
+            int dogs = walkDogs(startHour);
+            pay += dogs * 5;
+            if (dogs == maxDogs || startHour >= 9 && startHour <= 17)
+                pay += 3;
+            startHour++;
+        }
+        return pay;
     }
 }
+
+
 
